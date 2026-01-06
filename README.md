@@ -14,17 +14,26 @@ sudo apt update
 sudo apt install libglfw3-dev
 ```
 
+## Build project
 Also you can be needed install **Cmake**, if you have not one.
 ```shell
-sudo apt install Cmake
+sudo apt install cmake
 ```
 
-Build project.
+Create a new folder for a bit highter comfortable saving all building instructions.
 ```shell
+mkdir build
+cd build
+```
+
+And now you can build project.
+```shell
+cmake ..
 make
 ```
 
-After run just now created binary file:
+## Run
+After run just now created binary file.
 ```shell
 ./follower
 ```
