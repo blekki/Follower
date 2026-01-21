@@ -3,37 +3,36 @@ An ultra tiny project on how dots follow the cursor.
 
 ## Installation
 
-Use next command to clone the repository:
+Use the next command to clone the repository:
 ```shell
 git clone https://github.com/blekki/Follower.git
 ```
 
-Install dependities. If you use Linux, you can try this commands:
+Install all dependities, if you don't have them already. If you use Linux, you can try this commands:
 ```shell
 sudo apt update
 sudo apt install libglfw3-dev
-```
-
-## Build project
-Also you can be needed install **Cmake**, if you have not one.
-```shell
 sudo apt install cmake
 ```
 
-Create a new folder for a bit highter comfortable saving all building instructions.
+Next step you need to build the project.
 ```shell
-mkdir build
-cd build
-```
-
-And now you can build project.
-```shell
-cmake ..
 make
 ```
 
-## Run
-After run just now created binary file.
+After all you can run the project on your personal computer.
 ```shell
-./follower
+make run
 ```
+
+## Instruction
+List of the commands for everyone who wants understand or rewrite the project.
+| command | description |
+| ------- | ----------- |
+| `make` or `make all` | - Prepare the project to the correct work (build and compile). |
+| `make build` | - Build the project. Process stops if the `./build` folder already exists.|
+| `make rebuild` | - Forcibly rebuild. Recreate the `./build` folder. |
+| `make rm-build` | - remove the `./build` folder and everything inside. |
+| `make compile` | - Compile the project. |
+| `cd ./build && make` | - The same as previously command. |
+| `make run` | - Run the project binary file. |
