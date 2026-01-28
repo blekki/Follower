@@ -31,7 +31,7 @@ List of the commands for everyone who wants understand or rewrite the project.
 | ------- | ----------- |
 | `make` or `make all` | - Prepare the project to the correct work (build and compile). |
 | `make build` | - Build the project. Process stops if the `./build` folder already exists.|
-| `make rebuild` | - Forcibly rebuild. Recreate the `./build` folder. |
+| `make rebuild` | - Forcibly rebuild. Recreate the `./build` folder. Be careful with this command. |
 | `make rm-build` | - remove the `./build` folder and everything inside. |
 | `make compile` | - Compile the project. |
 | `cd ./build && make` | - The same as previously command. |
