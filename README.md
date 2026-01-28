@@ -26,6 +26,20 @@ make run
 ```
 
 ## Instruction
+
+As default the simulation is freeze. Use the selected key to run it!
+
+### Key binding
+
+Various keys to control a simualtion.
+
+| key | command |
+| --- | ------- |
+| `Space` | - stop/run a simulation. |
+| `Esc` | - Close an application |
+
+### Make commands
+
 List of the commands for everyone who wants understand or rewrite the project.
 | command | description |
 | ------- | ----------- |

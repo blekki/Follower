@@ -4,6 +4,7 @@
 
 #include <GLFW/glfw3.h>
 #include "coord.h"
+#include "enum/simStatus.h"
 
 using namespace std;
 
@@ -14,11 +15,17 @@ private:
     int width = 640;
     int height = 480;
 
+    static inline SimStatus simStatus = SIM_FREEZE; // simulation status
+
 private:
     static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
         if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
             glfwSetWindowShouldClose(window, true);
             cout << "*";
+        }
+
+        if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+            simStatus = (simStatus == SIM_FREEZE) ? SIM_RUN : SIM_FREEZE;
         }
     }
 
@@ -54,6 +61,8 @@ public:
     int shouldClose() { return glfwWindowShouldClose(window); }
     int getWidth()  { return width; }
     int getHeight() { return height; }
+    SimStatus getSimStatus() { return simStatus; }
+    
 
     Coord getCursorPos() {
         // screen cursor pos

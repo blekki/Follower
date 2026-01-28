@@ -38,6 +38,10 @@ public:
         return attractor;
     }
 
+    void resetLastCalcTime() {
+        this->lastCalcTime = glfwGetTime();
+    }
+
     // other methods
     void updateFolowers() {
         // use delta-time as correlation coef of attraction

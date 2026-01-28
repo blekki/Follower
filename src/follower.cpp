@@ -30,21 +30,34 @@ int main() {
     World world;
     Printer printer;
 
+    // prerender
+    window.preparateScene();
+    printer.setResolution(window.getWidth(), window.getHeight());
+    printer.printFolowers(world.getFollowers());
+    window.pollEvents();
+    window.swapBuffers();
+
     // render
     double lastRenderTime = 0.0;
     while (!window.shouldClose()) {
+        // frame preparations
+        window.pollEvents();
+        window.preparateScene();
+        printer.setResolution(window.getWidth(), window.getHeight());
+
         // frame rate limit
         double currentTime = glfwGetTime();
         double deltaTime = currentTime - lastRenderTime;
-        // skip rendering if frame time didn't come 
-        if(deltaTime < (1.0 / FRAME_RATE)) {
+        lastRenderTime = currentTime;
+        if(deltaTime < (1.0 / FRAME_RATE)) {    // skip rendering if frame time didn't come 
             continue;
         }
-        lastRenderTime = currentTime;
 
-        // frame preparations
-        window.preparateScene();
-        printer.setResolution(window.getWidth(), window.getHeight());
+        // check simulation status
+        if (window.getSimStatus() == SIM_FREEZE) {
+            world.resetLastCalcTime();
+            continue;
+        }
 
         // movement calculation
         world.setAttractorPos(window.getCursorPos());
@@ -52,6 +65,7 @@ int main() {
 
         // prepare buffer frame
         printer.printFolowers(world.getFollowers());
+        
         #ifdef EXTENDED_MOD
             // print speed of the first dot
             Dot* dot = &world.getFollowers()->at(0);
@@ -62,7 +76,6 @@ int main() {
         #endif
 
         // finish frame
-        window.pollEvents();
         window.swapBuffers();
     }
 
