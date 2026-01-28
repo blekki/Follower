@@ -11,6 +11,8 @@ private:
     Coord pos;
     Coord speedVec;
 
+    const float MAX_SPEED = 5.0f;
+
 public:
     // constructor
     Dot() {
@@ -31,6 +33,15 @@ public:
         pos += speedVec;
     }
 
+    void addAcceleration(Coord acceleration) {
+        this->speedVec += acceleration;
+        float len = speedVec.len();
+        if (len > MAX_SPEED) {
+            float k = MAX_SPEED / len;
+            speedVec *= k;
+        }
+    }
+
     void addAttractionFluence(Coord attractorPos, double deltaTime) {
         const float VEC_LENGTHEN = 5.0f;
 
@@ -43,6 +54,6 @@ public:
         attraction.normilize();
         attraction *= VEC_LENGTHEN;
 
-        this->speedVec += attraction * deltaTime;
+        addAcceleration(attraction * deltaTime);
     }
 };
