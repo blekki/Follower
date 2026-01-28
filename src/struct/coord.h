@@ -43,8 +43,13 @@ struct Coord
     }
 
     void operator+=(Coord other) {
-        this->x += other.x; 
+        this->x += other.x;
         this->y += other.y;
+    }
+
+    void operator*=(float other) {
+        this->x *= other;
+        this->y *= other;
     }
 
     Coord operator/(float value) {

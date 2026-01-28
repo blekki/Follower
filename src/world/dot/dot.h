@@ -31,15 +31,18 @@ public:
         pos += speedVec;
     }
 
-    void addAttractionFluence(Coord attractorPos) {
+    void addAttractionFluence(Coord attractorPos, double deltaTime) {
+        const float VEC_LENGTHEN = 5.0f;
+
         Coord from = this->pos;
         Coord to   = attractorPos;
 
         Coord attraction;
         attraction = to - from;
+        // make attraction the same for differ distances
         attraction.normilize();
+        attraction *= VEC_LENGTHEN;
 
-        // todo: add tiny deceleration;
-        this->speedVec += (attraction / 8.0f);
+        this->speedVec += attraction * deltaTime;
     }
 };

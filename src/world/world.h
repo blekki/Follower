@@ -14,8 +14,9 @@ class World
 private:
     vector<Dot> followers;
     Coord attractor;
+    double lastCalcTime = 0.0f;
 
-    const uint DOTS_COUNT = 10000;
+    const uint DOTS_COUNT = 1000;
 
 public:
     World() {
@@ -39,8 +40,13 @@ public:
 
     // other methods
     void updateFolowers() {
+        // use delta-time as correlation coef of attraction
+        double currentTime = glfwGetTime();
+        double deltaTime = currentTime - lastCalcTime;
+        this->lastCalcTime = currentTime;
+
         for (uint i = 0; i < DOTS_COUNT; i++) {
-            followers[i].addAttractionFluence(attractor);
+            followers[i].addAttractionFluence(attractor, deltaTime);
             followers[i].updatePos();
         }
     }
