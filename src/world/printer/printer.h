@@ -58,10 +58,31 @@ public:
         glEnd();
     }
 
+    // print line from screen centre to coord 
     void printRadiusVec(Coord to) {
         to = as_ndc(to);
         glBegin(GL_LINES);
         glVertex2d(0.0f, 0.0f);
+        glVertex2d(to.x, to.y);
+        glEnd();
+    }
+
+    void printLine(Coord from, Coord to) {
+        from = as_ndc(from);
+        Coord vec = as_ndc(to) - from;
+        
+        glBegin(GL_LINES);
+        glVertex2d(from.x, from.y);
+        glVertex2d(from.x + vec.x, from.y + vec.y);
+        glEnd();
+    }
+
+    void printDotDirection(Coord dotPos, Coord speed) {
+        Coord from = as_ndc(dotPos);
+        Coord to = from + as_ndc(speed);
+
+        glBegin(GL_LINES);
+        glVertex2d(from.x, from.y);
         glVertex2d(to.x, to.y);
         glEnd();
     }

@@ -8,6 +8,8 @@
 #include "window/window.h"
 #include "world/world.h"
 
+// #define EXTENDED_MOD // uncomment line to use extended render
+
 using namespace std;
 
 double const FRAME_RATE = 120.0f;
@@ -50,7 +52,14 @@ int main() {
 
         // prepare buffer frame
         printer.printFolowers(world.getFollowers());
-        printer.printRadiusVec(world.getAttractorPos());
+        #ifdef EXTENDED_MOD
+            // print speed of the first dot
+            Dot* dot = &world.getFollowers()->at(0);
+            printer.printDotDirection(
+                dot->getPos(), 
+                dot->getSpeed()
+            );
+        #endif
 
         // finish frame
         window.pollEvents();
