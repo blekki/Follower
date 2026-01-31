@@ -8,7 +8,12 @@
 #include "window/window.h"
 #include "world/world.h"
 
-// #define EXTENDED_MOD // uncomment line to use extended render
+/* 
+Uncomment the next definition command to use extended render "EXTENDED_MOD".
+Can be used for debugging.
+PS: Better use with only one dot simulation.
+*/
+// #define EXTENDED_MOD
 
 using namespace std;
 
@@ -48,20 +53,19 @@ int main() {
         // frame rate limit
         double currentTime = glfwGetTime();
         double deltaTime = currentTime - lastRenderTime;
-        lastRenderTime = currentTime;
         if(deltaTime < (1.0 / FRAME_RATE)) {    // skip rendering if frame time didn't come 
             continue;
         }
+        lastRenderTime = currentTime;
 
         // check simulation status
         if (window.getSimStatus() == SIM_FREEZE) {
-            world.resetLastCalcTime();
             continue;
         }
 
         // movement calculation
         world.setAttractorPos(window.getCursorPos());
-        world.updateFolowers();
+        world.updateFolowers(deltaTime);
 
         // prepare buffer frame
         printer.printFolowers(world.getFollowers());
@@ -77,6 +81,7 @@ int main() {
 
         // finish frame
         window.swapBuffers();
+        lastRenderTime += deltaTime;
     }
 
     // the last operations before exit

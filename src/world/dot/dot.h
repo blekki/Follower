@@ -54,6 +54,7 @@ public:
         attraction.normilize();
         attraction *= VEC_LENGTHEN;
 
+        // delta-time as correlation coef of attraction
         addAcceleration(attraction * deltaTime);
     }
 };
